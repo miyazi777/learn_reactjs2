@@ -6,7 +6,7 @@ class ExpComponent1 extends React.Component {
         const { target } = this.props;
 
         let el;
-        if (target == "true") {
+        if (target) {
             el = <div>Yes</div>
         } else {
             el = <div>No</div>
@@ -24,7 +24,7 @@ class ExpComponent2 extends React.Component {
         // テキストの出し分け
         return (
             <div>
-              {(bool == "true") ? 'Yes' : 'No'}
+              {(bool) ? 'Yes' : 'No'}
             </div>
         );
     }
@@ -38,7 +38,7 @@ class ExpComponent3 extends React.Component {
         // 要素の出し分け
         return (
             <div>
-                {(bool == "true") ? <strong>Yes</strong> : <span>No</span>}
+                {(bool) ? <strong>Yes</strong> : <span>No</span>}
             </div>
                );
     }
@@ -51,8 +51,8 @@ class ExpComponent4 extends React.Component {
 
         return (
             <div>
-                { (bool == "true") ? <div>Yes</div> : null }
-                { !(bool == "true") ? <div>No</div> : null }
+                { (bool) ? <div>Yes</div> : null }
+                { !(bool) ? <div>No</div> : null }
             </div>
             );
     }
@@ -74,24 +74,76 @@ class ExpComponent5 extends React.Component {
     }
 }
 
+// cssのクラス名を付けるサンプル
+class ExpComponent6 extends React.Component {
+    render() {
+        return (
+        <div className="red">
+            class name example
+        </div>
+        );
+    }
+}
+
+// cssのクラス名を付けるサンプル(boolの値によってクラス名が変化)
+class ExpComponent7 extends React.Component {
+    render() {
+        const {bool} = this.props;
+
+        let divClassName = "red";
+        if (bool) {
+            divClassName = "blue";
+        }
+
+        return (
+            <div className={divClassName}>
+              class name example2
+            </div>
+        );
+    }
+}
+
+// ES2015のTemplate stringsを使ってCSSを動的に
+class ExpComponent8 extends React.Component {
+    render() {
+        const {bool} = this.props;
+
+        return (
+          <div className={`${(bool) ? 'red' : 'blue' }`}>
+            dynamic css
+          </div>
+        );
+    }
+}
+
+
 class AppComponent extends React.Component {
     render() {
         return (
             <section>
                 <div>Example1 (if1)</div>
-                <ExpComponent1 target="true"/>
+                <ExpComponent1 target={true}/>
                 <hr/>
                 <div>Example2 (if2)</div>
-                <ExpComponent2 bool="true"/>
+                <ExpComponent2 bool={true}/>
                 <hr/>
                 <div>Example3 (if3)</div>
-                <ExpComponent3 bool="false"/>
+                <ExpComponent3 bool={false}/>
                 <hr/>
                 <div>Example4 (if4)</div>
-                <ExpComponent4 bool="false"/>
+                <ExpComponent4 bool={false}/>
                 <hr/>
                 <div>Example5 (loop)</div>
                 <ExpComponent5/>
+                <hr/>
+                <div>Example6</div>
+                <ExpComponent6/>
+                <hr/>
+                <div>Example7</div>
+                <ExpComponent7 bool={true}/>
+                <hr/>
+                <div>Example8</div>
+                <ExpComponent8 bool={false}/>
                 <hr/>
             </section>
         );
