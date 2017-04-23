@@ -14,6 +14,7 @@ class App extends React.Component {
 		};
 
 		this._addToCart = this._addToCart.bind(this);
+		this._removeFromCart = this._removeFromCart.bind(this);
 	}
 
 	render() {
@@ -27,6 +28,7 @@ class App extends React.Component {
 				  listItems={listItems}
 					cartItems={cartItems}
 					addToCart={this._addToCart}
+					removeFromCart={this._removeFromCart}
 			  />
 			  <Footer/>
 			</div>
@@ -37,6 +39,12 @@ class App extends React.Component {
 		let newCartItems = this.state.cartItems.slice();
 		newCartItems.push(item);
 		this.setState({ cartItems: newCartItems });
+	}
+
+	_removeFromCart(idx) {
+		let newCartItems = this.state.cartItems.slice();
+		newCartItems.splice(idx, 1);
+		this.setState({cartItems: newCartItems });
 	}
 }
 

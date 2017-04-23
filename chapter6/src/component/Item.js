@@ -8,6 +8,8 @@ const Item = (props) => {
 		desc,
 		price,
 		onClickBtn,
+		btnLabel,
+		isSimple,
 	} = props;
 
 
@@ -15,10 +17,13 @@ const Item = (props) => {
     <div className="Item">
 		  <h3 className="Item__title">{title}</h3>
 			<span className="Item__auth">{author}</span>
-			<p className="Item__desc">{desc}</p>
+			{isSimple ? null : <p className="Item__desc">{desc}</p>}
 			<p className="Item__price">{price}円</p>
 			<div className="Item__btnWrap">
-			  <button type="button" className="Btn" onClick={onClickBtn}>カートへ</button>
+			  <button
+				  type="button"
+					className="Btn"
+					onClick={onClickBtn}>{btnLabel}</button>
 			</div>
 		</div>
   );

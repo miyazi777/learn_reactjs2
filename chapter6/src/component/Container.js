@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { calcTotalByItems } from '../util';
+
 import Cart from './Cart.js';
 import ItemList from './ItemList.js';
 
@@ -8,6 +10,7 @@ const Container = (props) => {
 		listItems,
     cartItems,
 		addToCart,
+		removeFromCart,
  	} = props;
 
 	return (
@@ -22,10 +25,13 @@ const Container = (props) => {
 
 			<div className="CartArea">
 			  <h4>カート</h4>
-				<Cart items={cartItems}/>
+				<Cart
+					items={cartItems}
+					removeFromCart={removeFromCart}
+			  />
 				<div className="Total">
-				  計0点
-					<span className="Total__price">0円</span>
+				  計{cartItems.length}点
+					<span className="Total__price">{calcTotalByItems(cartItems)}円</span>
 				</div>
 			</div>
 		</main>
@@ -36,6 +42,7 @@ Container.propTypes = {
 	listItems: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 	cartItems: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 	addToCart: React.PropTypes.func.isRequired,
+	removeFromCart: React.PropTypes.func.isRequired,
 }
 
 export default Container;
